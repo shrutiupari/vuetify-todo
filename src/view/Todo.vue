@@ -45,6 +45,7 @@
       <!-- <v-icon size="100px" color="primary"> mdi-check </v-icon>
       <div class="text-h5 primary--text">No Tasks</div> -->
     </no-tasks>
+    <button-toggle v-if="$store.state.sortTasks" />
   </div>
 </template>
 
@@ -100,12 +101,9 @@ export default {
     "field-add-tasks": require("@/components/ToDoTasks/FieldTask.vue").default,
     "list-tasks": require("@/components/ToDoTasks/ListTasks.vue").default,
     "no-tasks": require("@/components/ToDoTasks/NoTasks.vue").default,
-
-
+    "button-toggle": require("@/components/ToDoTasks/ButtonToggle.vue").default,
   },
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
