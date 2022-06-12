@@ -1,7 +1,13 @@
 <template>
   <!-- v-if="$store.state.tasks.length" -->
   <v-list class="pt-0" flat>
-    <tasks-list v-for="task in $store.state.tasks" :key="task.id" :task="task" />
+    <draggable v-model="tasks" handle=".handle">
+      <tasks-list
+        v-for="task in tasks"
+        :key="task.id"
+        :task="task"
+      />
+    </draggable>
     <!-- <v-list-item
       @click="$store.commit('doneTasks', task.id)"
       :class="{ 'blue lighten-5': task.done }"
@@ -29,9 +35,21 @@
 </template>
 
 <script>
+import draggable from "vuedraggable";
 export default {
+  computed: {
+    tasks: {
+      get() {
+        return this.$store.getters.taskFiltered
+      },
+      set(value) {
+        this.$store.dispatch('updateList', value);
+      }
+    }
+  },
   components: {
-   "tasks-list": require('@/components/ToDoTasks/TasksItem.vue').default
+    draggable,
+    "tasks-list": require("@/components/ToDoTasks/TasksItem.vue").default,
   },
 };
 </script>
